@@ -16,3 +16,6 @@ Usually you gotta follow this sequence
 3. modify SdkRoot in armgcc/CMakeLists.txt
 4. modify armgcc.cmake pathin build_debug.sh (or build_release.sh)
 5. happy making!
+
+## Flashing & Debugging
+As of this writing, it looks like FRD-K64F is not well supported by OpenOCD. So I guess it's best and more convenient to go with Segger OpenSDA and JLink. Just download Segger OpenSDA V2.0 from [segger web site](https://www.segger.com/downloads/jlink/#JLinkOpenSDABoardSpecificFirmwares). Be sure to download Board-Specific Firmware.
