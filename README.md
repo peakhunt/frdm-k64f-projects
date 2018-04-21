@@ -31,3 +31,7 @@ To debug,
 5. load
 6. cont
 7. happy debugging & flashing
+
+# Brief Introduction on projects
+1. blinky
+this is a bare-metal version of typical blinky. Quite surprising Kinetis SDK doesn't come with any sort of delay library.
