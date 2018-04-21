@@ -1,6 +1,6 @@
 # frdm-k64f-projects
 
-![FRDM-K64F)(https://github.com/peakhunt/frdm-k64f-projects/images/FRDM-K64F.jpg)
+![FRDM-K64F](images/FRDM-K64F.jpg)
 
 this repo contains my personal projects using FRDM-K64F board.
 
