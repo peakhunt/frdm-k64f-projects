@@ -35,6 +35,13 @@ To debug,
 ## Clock & Pin Configuration
 I guess it's best to go with MCUExpress for the job.
 Luckily there are Linux and Mac version from NXP web site.
+Anyway K64F datasheet has a good diagram on the overall clock architecture.
+It would be much better if there was a tool like STM32 CubeMX for clock configuration, with which we can visualize clock structure intuitively.
+
+## FXOS8700CQ issue
+My original plan was to implement an 9-DOF IMU with this board. But Alas! FXOS8700CQ has no gyro!!!
+I really have no idea what they were thinking when developing FXOS8700CQ!
+What's the point of Accelerometer and Magnetometer without Gyro?
 
 ## Brief Introduction on projects
 1. blinky
