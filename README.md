@@ -19,3 +19,15 @@ Usually you gotta follow this sequence
 
 ## Flashing & Debugging
 As of this writing, it looks like FRD-K64F is not well supported by OpenOCD. So I guess it's best and more convenient to go with Segger OpenSDA and JLink. Just download Segger OpenSDA V2.0 from [segger web site](https://www.segger.com/downloads/jlink/#JLinkOpenSDABoardSpecificFirmwares). Be sure to download Board-Specific Firmware.
+
+With Segger OpenSDA, flashing is just a matter of drag & drop. If it doesn't work, you might have installed a generic firmware.
+
+To debug,
+
+1. JLinkGDBServer -device MK64FN1M0xxx12 -if SWD
+2. arm-none-eabi-gdb -ex 'target remote:2331' your.elf
+3. monitor reset
+4. monitor halt
+5. load
+6. cont
+7. happy debugging & flashing
