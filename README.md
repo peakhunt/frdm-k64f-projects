@@ -32,11 +32,11 @@ To debug,
 6. cont
 7. happy debugging & flashing
 
-# Clock & Pin Configuration
+## Clock & Pin Configuration
 I guess it's best to go with MCUExpress for the job.
 Luckily there are Linux and Mac version from NXP web site.
 
-# Brief Introduction on projects
+## Brief Introduction on projects
 1. blinky
 
    this is a bare-metal version of typical blinky. Quite surprising Kinetis SDK doesn't come with any sort of delay library.
