@@ -34,5 +34,4 @@ To debug,
 
 # Brief Introduction on projects
 1. blinky
-
    this is a bare-metal version of typical blinky. Quite surprising Kinetis SDK doesn't come with any sort of delay library.
