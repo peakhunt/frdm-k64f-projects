@@ -1,6 +1,6 @@
 # frdm-k64f-projects
 
-![FRDM-K64F)(images/FRDM-K64F.jpg?raw=true")
+![FRDM-K64F)(images/FRDM-K64F.jpg?raw=true)
 
 this repo contains my personal projects using FRDM-K64F board.
 
