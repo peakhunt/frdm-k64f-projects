@@ -410,22 +410,22 @@ set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -T${ProjDirPat
 
 set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} -T${ProjDirPath}/MK64FN1M0xxx12_flash.ld -static")
 
-TARGET_LINK_LIBRARIES(blinky.elf -Wl,--start-group)
-target_link_libraries(blinky.elf debug m)
+TARGET_LINK_LIBRARIES(${TargetName}.elf -Wl,--start-group)
+target_link_libraries(${TargetName}.elf debug m)
 
-target_link_libraries(blinky.elf debug c)
+target_link_libraries(${TargetName}.elf debug c)
 
-target_link_libraries(blinky.elf debug gcc)
+target_link_libraries(${TargetName}.elf debug gcc)
 
-target_link_libraries(blinky.elf debug nosys)
+target_link_libraries(${TargetName}.elf debug nosys)
 
-target_link_libraries(blinky.elf optimized m)
+target_link_libraries(${TargetName}.elf optimized m)
 
-target_link_libraries(blinky.elf optimized c)
+target_link_libraries(${TargetName}.elf optimized c)
 
-target_link_libraries(blinky.elf optimized gcc)
+target_link_libraries(${TargetName}.elf optimized gcc)
 
-target_link_libraries(blinky.elf optimized nosys)
+target_link_libraries(${TargetName}.elf optimized nosys)
 
-TARGET_LINK_LIBRARIES(blinky.elf -Wl,--end-group)
+TARGET_LINK_LIBRARIES(${TargetName}.elf -Wl,--end-group)
 
