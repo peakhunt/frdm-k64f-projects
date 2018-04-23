@@ -24,6 +24,9 @@ SET(ProjDirPath ${CMAKE_CURRENT_SOURCE_DIR})
 # SDK Root
 SET (SdkRoot "../../../sdk")
 
+# Target Name
+SET (TargetName "blinky")
+
 
 SET(CMAKE_ASM_FLAGS_DEBUG "${CMAKE_ASM_FLAGS_DEBUG} -DDEBUG")
 
@@ -351,7 +354,7 @@ include_directories(${SdkRoot}/devices/MK64F12/utilities)
 
 include_directories(${SdkRoot}/devices/MK64F12)
 
-add_executable(blinky.elf 
+add_executable(${TargetName}.elf 
 "${ProjDirPath}/../blinky.c"
 "${ProjDirPath}/../pin_mux.c"
 "${ProjDirPath}/../pin_mux.h"
@@ -387,6 +390,19 @@ add_executable(blinky.elf
 "${SdkRoot}/devices/MK64F12/system_MK64F12.h"
 "${SdkRoot}/devices/MK64F12/gcc/startup_MK64F12.S"
 "${SdkRoot}/devices/MK64F12/utilities/fsl_assert.c"
+)
+
+add_custom_target(${TargetName}.bin ALL DEPENDS ${CMAKE_BUILD_TYPE}/${TargetName}.elf
+  COMMAND ${CMAKE_OBJCOPY} -O binary -S ${CMAKE_BUILD_TYPE}/${TargetName}.elf ${CMAKE_BUILD_TYPE}/${TargetName}.bin
+)
+
+add_custom_target(${TargetName}.hex ALL DEPENDS ${CMAKE_BUILD_TYPE}/${TargetName}.elf
+  COMMAND ${CMAKE_OBJCOPY} -O ihex ${CMAKE_BUILD_TYPE}/${TargetName}.elf ${CMAKE_BUILD_TYPE}/${TargetName}.hex
+)
+
+set_property( DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES
+  "${CMAKE_BUILD_TYPE}/${TargetName}.bin"
+  "${CMAKE_BUILD_TYPE}/${TargetName}.hex"
 )
 
 
