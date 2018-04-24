@@ -56,3 +56,5 @@ What's the point of Accelerometer and Magnetometer without Gyro?
 
    this is a main loop based, single threaded blinky example using soft timer.  take a look at it. You might like it.
   
+4. event_dispatcher
+   this is a shell demo based on event dispatcher.
