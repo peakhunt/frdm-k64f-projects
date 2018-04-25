@@ -24,6 +24,9 @@ SET(ProjDirPath ${CMAKE_CURRENT_SOURCE_DIR})
 # SDK Root
 SET (SdkRoot "../../../sdk")
 
+# Target Name
+SET (TargetName "freertos_blinky")
+
 
 SET(CMAKE_ASM_FLAGS_DEBUG "${CMAKE_ASM_FLAGS_DEBUG} -DDEBUG")
 
@@ -347,7 +350,7 @@ include_directories(${SdkRoot}/devices/MK64F12/utilities)
 
 include_directories(${SdkRoot}/devices/MK64F12)
 
-add_executable(freertos_blinky.elf 
+add_executable(${TargetName}.elf 
 "${ProjDirPath}/../freertos_blinky.c"
 "${ProjDirPath}/../pin_mux.c"
 "${ProjDirPath}/../pin_mux.h"
@@ -412,27 +415,39 @@ add_executable(freertos_blinky.elf
 "${SdkRoot}/rtos/amazon-freertos/lib/FreeRTOS/portable/MemMang/heap_4.c"
 )
 
+add_custom_target(${TargetName}.bin ALL DEPENDS ${CMAKE_BUILD_TYPE}/${TargetName}.elf
+  COMMAND ${CMAKE_OBJCOPY} -O binary -S ${CMAKE_BUILD_TYPE}/${TargetName}.elf ${CMAKE_BUILD_TYPE}/${TargetName}.bin
+)
+
+add_custom_target(${TargetName}.hex ALL DEPENDS ${CMAKE_BUILD_TYPE}/${TargetName}.elf
+  COMMAND ${CMAKE_OBJCOPY} -O ihex ${CMAKE_BUILD_TYPE}/${TargetName}.elf ${CMAKE_BUILD_TYPE}/${TargetName}.hex
+)
+
+set_property( DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES
+  "${CMAKE_BUILD_TYPE}/${TargetName}.bin"
+  "${CMAKE_BUILD_TYPE}/${TargetName}.hex"
+)
+
 
 set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -T${ProjDirPath}/MK64FN1M0xxx12_flash.ld -static")
 
 set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} -T${ProjDirPath}/MK64FN1M0xxx12_flash.ld -static")
 
-TARGET_LINK_LIBRARIES(freertos_blinky.elf -Wl,--start-group)
-target_link_libraries(freertos_blinky.elf debug m)
+TARGET_LINK_LIBRARIES(${TargetName}.elf -Wl,--start-group)
+target_link_libraries(${TargetName}.elf debug m)
 
-target_link_libraries(freertos_blinky.elf debug c)
+target_link_libraries(${TargetName}.elf debug c)
 
-target_link_libraries(freertos_blinky.elf debug gcc)
+target_link_libraries(${TargetName}.elf debug gcc)
 
-target_link_libraries(freertos_blinky.elf debug nosys)
+target_link_libraries(${TargetName}.elf debug nosys)
 
-target_link_libraries(freertos_blinky.elf optimized m)
+target_link_libraries(${TargetName}.elf optimized m)
 
-target_link_libraries(freertos_blinky.elf optimized c)
+target_link_libraries(${TargetName}.elf optimized c)
 
-target_link_libraries(freertos_blinky.elf optimized gcc)
+target_link_libraries(${TargetName}.elf optimized gcc)
 
-target_link_libraries(freertos_blinky.elf optimized nosys)
+target_link_libraries(${TargetName}.elf optimized nosys)
 
-TARGET_LINK_LIBRARIES(freertos_blinky.elf -Wl,--end-group)
-
+TARGET_LINK_LIBRARIES(${TargetName}.elf -Wl,--end-group)
