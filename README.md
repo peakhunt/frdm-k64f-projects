@@ -59,3 +59,7 @@ What's the point of Accelerometer and Magnetometer without Gyro?
 4. shell
 
    this is a shell demo based on event dispatcher.
+
+5. shell_freertos
+
+   this is a shell demo based on task & freertos event.
