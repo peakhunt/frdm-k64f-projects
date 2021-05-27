@@ -9,6 +9,7 @@
 #ifndef CIRC_BUFFER_H_
 #define CIRC_BUFFER_H_
 
+#include <stdio.h>
 #include <stdint.h>
 #include "app_common.h"
 
@@ -20,21 +21,21 @@ typedef void (*circ_buf_leave_critical)(CircBuffer* cb);
 struct __circ_buffer
 {
   volatile uint8_t*     buffer;
-  volatile uint8_t      capacity;
-  volatile uint8_t      num_bytes;
-  volatile uint8_t      begin;
-  volatile uint8_t      end;
+  volatile uint16_t     capacity;
+  volatile uint16_t     num_bytes;
+  volatile uint16_t     begin;
+  volatile uint16_t     end;
 
   circ_buf_enter_critical   enter_critical;
   circ_buf_leave_critical   leave_critical;
 } ;
 
-extern void circ_buffer_init(CircBuffer* cb, volatile uint8_t* buffer, uint8_t capacity,
+extern void circ_buffer_init(CircBuffer* cb, volatile uint8_t* buffer, uint16_t capacity,
     circ_buf_enter_critical enter_critical,
     circ_buf_leave_critical leave_critical);
 
-extern uint8_t circ_buffer_enqueue(CircBuffer* cb, uint8_t* data, uint8_t size, uint8_t from_isr);
-extern uint8_t circ_buffer_dequeue(CircBuffer* cb, uint8_t* data, uint8_t size, uint8_t from_isr);
+extern uint8_t circ_buffer_enqueue(CircBuffer* cb, uint8_t* data, uint16_t size, uint8_t from_isr);
+extern uint8_t circ_buffer_dequeue(CircBuffer* cb, uint8_t* data, uint16_t size, uint8_t from_isr);
 extern uint8_t circ_buffer_first(CircBuffer* cb, uint8_t* data);
 extern uint8_t circ_buffer_last(CircBuffer* cb, uint8_t* data);
 
@@ -48,11 +49,17 @@ circ_buffer_is_empty(CircBuffer* cb, uint8_t from_isr)
     return cb->num_bytes == 0 ? true : false;
   }
 
-  cb->enter_critical(cb);
+  if(cb->enter_critical != NULL)
+  {
+    cb->enter_critical(cb);
+  }
 
   ret = cb->num_bytes == 0 ? true : false;
 
-  cb->leave_critical(cb);
+  if(cb->leave_critical != NULL)
+  {
+    cb->leave_critical(cb);
+  }
 
   return ret;
 }
@@ -67,11 +74,17 @@ circ_buffer_is_full(CircBuffer* cb, uint8_t from_isr)
     return cb->num_bytes == 0 ? true : false;
   }
 
-  cb->enter_critical(cb);
+  if(cb->enter_critical != NULL)
+  {
+    cb->enter_critical(cb);
+  }
 
   ret = cb->num_bytes >= cb->capacity ? true : false;
 
-  cb->leave_critical(cb);
+  if(cb->leave_critical != NULL)
+  {
+    cb->leave_critical(cb);
+  }
 
   return ret;
 }

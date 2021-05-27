@@ -1,5 +1,4 @@
 #include "fsl_device_registers.h"
-#include "fsl_debug_console.h"
 #include "board.h"
 
 #include "pin_mux.h"
@@ -8,7 +7,7 @@
 
 #include "mainloop_timer.h"
 
-#define BLINKY_INTERVAL         100
+#define BLINKY_INTERVAL         50
 
 static SoftTimerElem    _blinky_timer;
 static int              _led_ndx = 0;

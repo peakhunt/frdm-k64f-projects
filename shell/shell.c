@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 #include "shell.h"
+#include "shell_if_usb.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -15,7 +16,7 @@
 #define SHELL_MAX_COLUMNS_PER_LINE      128
 #define SHELL_COMMAND_MAX_ARGS          4
 
-#define VERSION       "STM32F1 Shell V0.2a"
+#define VERSION       "FRDM-K64F Shell V0.2a"
 
 typedef void (*shell_command_handler)(ShellIntf* intf, int argc, const char** argv);
 
@@ -165,7 +166,7 @@ shell_init(void)
   extern void shell_if_uart_init(void);
 
   shell_if_uart_init();
-  //shell_if_usb_init();
+  shell_if_usb_init();
 }
 
 void

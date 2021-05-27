@@ -1,5 +1,4 @@
 #include "fsl_device_registers.h"
-#include "fsl_debug_console.h"
 #include "board.h"
 
 #include "pin_mux.h"
@@ -10,6 +9,7 @@
 #include "mainloop_timer.h"
 #include "blinky.h"
 #include "shell.h"
+#include "shell_if_usb.h"
 
 /*******************************************************************************
  * Definitions
@@ -38,13 +38,12 @@ main(void)
   mainloop_timer_init();
   sys_tick_init();
 
-  PRINTF("blinky.\r\n");
-
   blinky_init();
   shell_init();
 
   while (1)
   {
     event_dispatcher_dispatch();
+    shell_if_usb_task();
   }
 }
